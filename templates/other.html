@@ -1,0 +1,594 @@
+
+                 <!-- <div class="row movie mb-4">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img src="{{ i.image.url }}" class="img-fluid">
+                </div>
+                <div class="col-md-6 movie-info d-flex flex-column justify-content-center">
+                    <h2>{{ i.Name }}</h2>
+                    <p><strong>Year: </strong>{{ i.Year }}</p>
+                    <p><strong>Description:</strong> {{ i.Description }}</p>                
+                    <div class="d-flex">
+                        <a class="btn btn-warning mr-2" href="{% url 'fapp:update' i.id %}">UPDATE</a>
+                        <a class="btn btn-danger" href="{% url 'fapp:delete' i.id %}">DELETE</a>
+                    </div>
+                </div>
+            </div> -->
+
+            /* h1 {
+                text-align: center;
+            }
+            .movie img {
+                margin-right: 20px;
+                width: 250px;
+            }
+            .movie-info h2 {
+                text-align: center;
+            } */
+
+
+                <!-- <h3><center> To add new content</center></h3> -->
+    <!-- <a class="btn btn-success" href="{% url 'fapp:home' %}">ADD</a> -->
+
+
+    /* Container for the cards */
+    .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    }
+
+    /* Individual card styling */
+    .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    }
+
+    /* Card hover effect */
+    .card:hover {
+    transform: scale(1.05);
+    }
+
+    /* Image styling */
+    .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    }
+
+    /* Button spacing */
+    .card-body .d-flex {
+    gap: 10px;
+    }
+
+
+
+        <!-- </form>
+
+    <form action=""  method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div>
+            <label>NAME : </label>
+            <input type="TEXT" id="name" name="name" requiered>
+        </div>
+
+        <div>
+            <label>IMAGE : </label>
+            <input type="file" id="image" name="image" requiered>
+        </div>
+
+        <div>
+            <label>YEAR : </label>
+            <input type="number" id="year" name="year" requiered>
+        </div>
+
+        <div>
+            <label>DESCRIPTION : </label>
+            <textarea id="desc" name="desc"  rows="4" required></textarea>
+        </div>
+
+        <div>
+            <input type="submit" value="submit">
+        </div>
+
+    </form> -->
+
+
+
+
+
+
+
+index.html
+
+    
+{% extends "base.html" %}
+{% block title %} index {% endblock %}
+{% block extra_styles %}
+    <style>
+
+
+    /* Ensures all cards have the same height */
+    .card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card-body {
+      flex-grow: 1;
+    }
+
+    /* Styles for the card image */
+    .card-img-top {
+      height: 400px;
+      width: auto;
+      object-fit: cover;
+    }
+
+    /* Styles for the card title and year */
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .card-year {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Button styles */
+    .btn {
+      margin-right: 0.5rem;
+    }
+
+    .show-more {
+      background: none;
+      border: none;
+      color: #007bff;
+      cursor: pointer;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    /* Centered button for adding more cards */
+    .d-flex.justify-content-center.my-4 .btn {
+      margin-top: 1rem;
+    }
+
+
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h1><center>MOLLYWOOD</center></h1>
+
+
+<div class="row">
+    {% for i in movie %}
+    <div class="col-md-3">
+    <div class="card" style="width: 18rem;">
+      <img src="{{ i.image.url }}" class="card-img-top" alt="Image">
+      <div class="card-body">
+        <h5 class="card-title">{{ i.Name }}</h5>
+        <p class="card-year"><strong>Year: </strong>{{ i.Year }}</p>
+        <p class="card-text"><strong>Description:</strong> {{ i.Description }}</p>
+        <button class="btn btn-link show-more" onclick="toggleDescription(this)">Show more</button>
+
+      </div>
+      <div class="card-body">
+        <div class="d-flex">
+          <a class="btn btn-warning mr" href="{% url 'fapp:update' i.id %}">UPDATE</a>
+          <a class="btn btn-danger" href="{% url 'fapp:delete' i.id %}">DELETE</a>
+        </div>
+      </div>
+    </div>
+    </div>
+  {% endfor %}
+</div>
+  
+            
+    <div class="d-flex justify-content-center my-4">
+        <a class="btn btn-success btn-lg" href="{% url 'fapp:home' %}"> TO ADD MORE</a>
+    </div>
+
+
+{% endblock %}
+
+
+
+<script>
+  function toggleDescription(button) {
+    var cardText = button.previousElementSibling;
+    if (cardText.style.display === "none") {
+      cardText.style.display = "block";
+      button.textContent = 'Show less';
+    } else {
+      cardText.style.display = "none";
+      button.textContent = 'Show more';
+    }
+  }
+  </script>
+  
+  {% extends "base.html" %}
+{% block title %} index {% endblock %}
+{% block extra_styles %}
+<style>
+  /* Ensures all cards have the same height */
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-body {
+    flex-grow: 1;
+  }
+
+  /* Styles for the card image */
+  .card-img-top {
+    height: 400px;
+    width: auto;
+    object-fit: cover;
+  }
+
+  /* Styles for the card title and year */
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .card-year {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Button styles */
+  .btn {
+    margin-right: 0.5rem;
+  }
+
+  .show-more {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+  }
+
+  /* Centered button for adding more cards */
+  .d-flex.justify-content-center.my-4 .btn {
+    margin-top: 1rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h1><center>MOLLYWOOD</center></h1>
+
+<div class="row">
+  {% for i in movie %}
+  <div class="col-md-3">
+    <div class="card" style="width: 18rem;">
+      <img src="{{ i.image.url }}" class="card-img-top" alt="Image">
+      <div class="card-body">
+        <h5 class="card-title">{{ i.Name }}</h5>
+        <p class="card-year"><strong>Year: </strong>{{ i.Year }}</p>
+        <p class="card-text description" style="display: none;"><strong>Description:</strong> {{ i.Description }}</p>
+        <button class="btn btn-link show-more" onclick="toggleDescription(this)">Show more</button>
+      </div>
+      <div class="card-body">
+        <div class="d-flex">
+          <a class="btn btn-warning mr" href="{% url 'fapp:update' i.id %}">UPDATE</a>
+          <a class="btn btn-danger" href="{% url 'fapp:delete' i.id %}">DELETE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="d-flex justify-content-center my-4">
+  <a class="btn btn-success btn-lg" href="{% url 'fapp:home' %}"> TO ADD MORE</a>
+</div>
+
+{% endblock %}
+
+<script>
+  function toggleDescription(button) {
+    var card = button.closest('.card');
+    var description = card.querySelector('.description');
+    if (description.style.display === "none" || description.style.display === "") {
+      description.style.display = "block";
+      button.textContent = 'Show less';
+    } else {
+      description.style.display = "none";
+      button.textContent = 'Show more';
+    }
+  }
+</script>
+
+
+edit.html  
+
+
+{% extends "base.html" %}
+{% block title %} edit {% endblock %}
+{% block extra_styles %}
+    <style>
+        
+    </style>
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div>
+                <input type="submit" value="submit">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+home.html  
+{% extends "base.html" %}
+{% block title %} index {% endblock %}
+{% block extra_styles %}
+    <style>
+        .footer {
+            background-color: #343a40;
+            color: #f1ebeb;
+            text-align: center;
+            padding: 10px 0;
+            padding-top: 10px;
+            position: fixed;
+            left: 0%;
+            right: 0%;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input[type="file"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <form action="" method="POST" enctype="multipart/form-data" class="form-container">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">NAME:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="image">IMAGE:</label>
+            <input type="file" id="image" name="image" required>
+        </div>
+
+        <div class="form-group">
+            <label for="year">YEAR:</label>
+            <input type="number" id="year" name="year" required>
+        </div>
+
+        <div class="form-group">
+            <label for="desc">DESCRIPTION:</label>
+            <textarea id="desc" name="desc" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+
+
+
+
+{% endblock %}
+
+
+i need to style my home.html
+in an attractive way in which the color is matching to main page
+form should be aligned to center
+
+
+
+
+delete.html
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <H2>ARE YOU SURE, YOU WANT TO DELETE?</H2>
+    <input type="submit" value="DELETE">
+</form>
+
+
+
+
+
+
+
+
+
+
+index 
+
+{% extends "base.html" %}
+{% block title %} index {% endblock %}
+{% block extra_styles %}
+<style>
+  /* Ensures all cards have the same height */
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-body {
+    flex-grow: 1;
+  }
+
+  /* Styles for the card image */
+  .card-img-top {
+    height: 400px;
+    width: auto;
+    object-fit: cover;
+  }
+
+  /* Styles for the card title and year */
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card-year {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Button styles */
+  .btn {
+    margin-right: 0.5rem;
+  }
+  .card-text.show-more {
+    max-height: none;
+  }
+
+  .show-more-btn {
+    cursor: pointer;
+    color: #007bff;
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: center;
+  }
+
+  /* Centered button for adding more cards */
+  .d-flex.justify-content-center.my-4 .btn {
+    margin-top: 1rem;
+  }
+
+  .add:hover {
+    transform: scale(1.05);
+  }
+  h1:hover {
+    transform: scale(1.05);
+  }
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h1><center>MOLLYWOOD</center></h1>
+
+<div class="row">
+  {% for i in movie %}
+  <div class="col-md-3">
+    <div class="card" style="width: 18rem;">
+      <img src="{{ i.image.url }}" class="card-img-top" alt="Image">
+      <div class="card-body">
+        <h5 class="card-title">{{ i.Name }}</h5>
+        <p class="card-year"><strong>Year: </strong>{{ i.Year }}</p>
+        <p class="card-text description" style="display: none;"><strong>Description:</strong> {{ i.Description }}</p>
+        <span class="show-more-btn" onclick="toggleDescription(this)">Show more</span>
+      </div>
+      <div class="card-body">
+        <div class="d-flex">
+          <a class="btn btn-warning mr" href="{% url 'fapp:update' i.id %}">UPDATE</a>
+          <a class="btn btn-danger" href="{% url 'fapp:delete' i.id %}">DELETE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="add">
+<div class="d-flex justify-content-center my-4">
+  <a class="btn btn-success btn-lg" href="{% url 'fapp:home' %}"> TO ADD MORE</a>
+</div>
+</div>
+
+
+{% endblock %}
+<script>
+  function toggleDescription(event) {
+    const cardText = event.target.previousElementSibling;
+    cardText.classList.toggle('show-more');
+    event.target.textContent = cardText.classList.contains('show-more') ? 'Show Less' : 'Show More';
+  }
+</script> 
+
+
+style="display: none;"
+const cardText = event.target.parentElement.previousElementSibling.querySelector('.description');

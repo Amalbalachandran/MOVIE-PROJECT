@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %} Edit {% endblock %}
+
+{% block extra_styles %}
+<style>
+  .container {
+    padding: 2rem 0;
+  }
+
+
+  .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh; /* Adjust height as needed */
+  }
+
+  form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Inherit colors from base.html for a cohesive look */
+  form h1, form label {
+    color: #DC143C; /* Deep Crimson color from base.html */
+  }
+
+  form input[type="text"],
+  form textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+  }
+
+  form input[type="submit"] {
+    background-color: #2f4f4f; /* Dark background from base.html */
+    color: #fff;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  form input[type="submit"]:hover {
+    background-color: #495057; /* Darker grey background on hover from base.html */
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="form">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div>
+        <input type="submit" value="submit">
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

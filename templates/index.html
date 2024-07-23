@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %} index {% endblock %}
+{% block extra_styles %}
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* .card-body {
+    flex-grow: 1;
+  } */
+
+  /* Styles for the card image */
+
+  /* .card-img-top {
+    height: 400px;
+    width: auto;
+    object-fit: cover;
+  } */
+
+  /* Styles for the card title and year */
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card-year {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Button styles */
+  .btn {
+    margin-right: 0.5rem;
+  }
+
+
+
+
+  
+  .card-text{
+    overflow: hidden;
+    max-height: 60px;
+    position: relative;
+    font-size: 0.9em;
+    color: #555;
+  }
+  .card-text.show-more {
+    max-height: none;
+  }
+  .show-more-btn {
+    cursor: pointer;
+    color: #007bff;
+    display: block;
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: center;
+  }
+
+  /* Centered button for adding more cards */
+  .d-flex.justify-content-center.my-4 .btn {
+    margin-top: 1rem;
+  }
+
+  .add:hover {
+    transform: scale(1.05);
+  }
+  h1:hover {
+    transform: scale(1.05);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h1><center>MOLLYWOOD</center></h1>
+
+<div class="row">
+  {% for i in movie %}
+  <div class="col-md-3">
+    <div class="card" style="width: 18rem;">
+      <img  src="{{ i.image.url }}" class="card-img-top" alt="Image">
+      <div class="card-body">
+        <h5 class="card-title">{{ i.Name }}</h5>
+        <p class="card-year"><strong>Year: </strong>{{ i.Year }}</p>
+        <p class="card-text"><strong>Description:</strong> {{ i.Description }}</p>
+        <span class="show-more-btn" onclick="toggleDescription(event)">Show more</span>
+      </div>
+      <div class="card-body">
+        <div class="d-flex">
+          <a class="btn btn-warning mr" href="{% url 'fapp:update' i.id %}">UPDATE</a>
+          <a class="btn btn-danger" href="{% url 'fapp:delete' i.id %}">DELETE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+<div class="add">
+<div class="d-flex justify-content-center my-4">
+  <a class="btn btn-success btn-lg" href="{% url 'fapp:home' %}"> TO ADD MORE</a>
+</div>
+</div>
+
+
+
+
+
+<script>
+  function toggleDescription(event) {
+    const cardText = event.target.previousElementSibling;
+    cardText.classList.toggle('show-more');
+    event.target.textContent = cardText.classList.contains('show-more') ? 'Show Less' : 'Show More';
+  }
+</script> 
+{% endblock %}

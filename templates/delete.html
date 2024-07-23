@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %} delete {% endblock %}
+{% block extra_styles %}
+    <style>
+    .footer {
+        background-color: #343a40;
+        color: #f1ebeb;
+        text-align: center;
+        padding: 10px 0;
+        padding-top: 10px;
+        position: fixed;
+        left: 0%;
+        right: 0%;
+        bottom: 0;
+        width: 100%;
+    }
+
+
+    .container {
+  padding-top: 5rem;  /* Adjust spacing from the top navbar */
+  text-align: center;  /* Center the content horizontally */
+}
+
+.confirmation-form {
+  display: inline-block;  /* Allow for centering within container */
+  padding: 2rem;
+  border-radius: 5px;
+  background-color: #fff;  /* White background for the form */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow effect */
+}
+
+h2 {
+  margin-bottom: 1rem;  /* Add some space below the heading */
+}
+
+.btn-delete {
+  background-color: #2f4f4f; /* Deep Crimson color from base.html */
+  color: #fff;
+  padding: 0.75rem 1.5rem;  /* Adjust padding for button size */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;  /* Indicate clickable button */
+}
+
+.btn-delete:hover {
+  background-color: #495057;  /* Darker shade on hover */
+}
+
+
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data" class="confirmation-form">
+          {% csrf_token %}
+      
+          <h2 style="background-color: inherit; color: #0f3031;">ARE YOU SURE, YOU WANT TO DELETE?</h2>
+      
+          <input type="submit" value="DELETE" class="btn-delete">  </form>
+    </div>
+
+</body>
+</html>
+
+{% endblock %}
